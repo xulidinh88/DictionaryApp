@@ -1,0 +1,3 @@
+Hello	Xin chào
+Transport	Phương tiện
+Translate	Dịch
