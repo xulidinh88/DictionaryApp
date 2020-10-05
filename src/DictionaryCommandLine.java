@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 /**
  * */
 public class DictionaryCommandLine extends DictionaryManagement{
@@ -16,23 +21,21 @@ public class DictionaryCommandLine extends DictionaryManagement{
     }
 
     /** to display word start with a word */
-    public void dictionarySearcher() {
-        System.out.println("Input word in order to search: ");
-        String str = scanner.nextLine();
+    public LinkedList<Word> dictionarySearcher(String str) {
+    	LinkedList<Word> temptListWords = new LinkedList<Word>();
         for (Word searchWord: dictionaries.words ) {
             if(searchWord.word_target.startsWith(str)) {
-                System.out.println(searchWord.word_target);
-            } else if (searchWord.word_explain.startsWith(str)) {
-                System.out.println(searchWord.word_explain);
+                temptListWords.add(searchWord);
             }
         }
+        return temptListWords;
     }
     /** advance insert Data and show data */
     public void dictionaryAdvanced() {
         insertFromFile();
         showAllWords();
         dictionaryLookup("s");
-        dictionarySearcher();
+        dictionarySearcher("s");
         editDictionary();
         dictionaryExportToFile();
     }

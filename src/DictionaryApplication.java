@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -28,13 +29,15 @@ import java.awt.SystemColor;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import java.awt.event.KeyAdapter;
+import java.util.LinkedList;
 
+/*Dictionary App*/
 public class DictionaryApplication extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField wordInput;
 	DictionaryManagement dicM= new DictionaryManagement();
-	
+	DictionaryCommandLine dicManL = new DictionaryCommandLine();
 	/**
 	 * Launch the application.
 	 */
@@ -51,7 +54,7 @@ public class DictionaryApplication extends JFrame {
 		});
 	}
 
-	/**
+	/*
 	 * Create the frame.
 	 */
 	public DictionaryApplication() {
@@ -74,7 +77,7 @@ public class DictionaryApplication extends JFrame {
 		
 		//Create Explain Area
 		JTextArea explainArea = new JTextArea();
-		explainArea.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		explainArea.setFont(new Font("Arial", Font.PLAIN, 20));
 		explainArea.setBackground(Color.WHITE);
 		explainArea.setBounds(211, 102, 349, 348);
 		contentPane.add(explainArea);
@@ -110,7 +113,7 @@ public class DictionaryApplication extends JFrame {
 		scrollPane.setBounds(31, 102, 170, 348);
 		contentPane.add(scrollPane);
 		scrollPane.setVisible(true);
-//		scrollPane.add(listWord);
+		scrollPane.add(listWord);
 		
 		/*Create Jtext Filed */
 		wordInput = new JTextField();
@@ -124,7 +127,22 @@ public class DictionaryApplication extends JFrame {
 					explainArea.setText(str);
 				}
 			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				LinkedList<Word> temp = new LinkedList<Word>();
+				String text = wordInput.getText();
+				text += e.getKeyChar();
+				text = text.toLowerCase().trim();
+				DefaultListModel<String> md = new DefaultListModel<>();
+				temp = dicManL.dictionarySearcher(text);
+				for(Word w : temp) {
+					md.addElement(w.word_target);
+				}
+				listWord.setModel(md);
+				
+			}
 		});
+		
 		
 		wordInput.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
 		wordInput.setToolTipText("Input text here");

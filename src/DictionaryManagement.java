@@ -24,14 +24,16 @@ public class DictionaryManagement extends Dictionary {
     }
     
     /** insert data from file */
-    private final File fileDictionaries = new File("Dictionaries.txt");
+    private final File fileDictionaries = new File("DictEV.dic");
     public void insertFromFile()  {
         try {
 
-            Scanner scanFile  = new Scanner(fileDictionaries);
+            Scanner scanFile  = new Scanner(fileDictionaries, "UTF-8");
+            
             while(scanFile.hasNextLine()) {
+            	System.out.print("Run to here");
                 String content = scanFile.nextLine();
-                String [] arrayStr = content.split("\t");
+                String [] arrayStr = content.split("=");
                 Word wordDraft = new Word(arrayStr[0], arrayStr[1]);
                 dictionaries.words.add(wordDraft);
             }
