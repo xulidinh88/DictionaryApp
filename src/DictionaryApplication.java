@@ -98,7 +98,7 @@ public class DictionaryApplication extends JFrame {
 		 * And Jtext setText to Speech
 		 */
 		JList listWord = new JList();
-		listWord.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
+		listWord.setFont(listWord.getFont().deriveFont(listWord.getFont().getStyle() | Font.BOLD));
 		listWord.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				String str = (String) listWord.getSelectedValue();
@@ -204,10 +204,10 @@ public class DictionaryApplication extends JFrame {
 		
 		/* Author  */
 		JTextArea author = new JTextArea();
-		author.setFont(new Font("Arial", Font.PLAIN, 13));
+		author.setFont(new Font("Arial", Font.BOLD, 13));
 		author.setText("Author: \u0110inh Xu\u00E2n Linh && Nguy\u1EC5n Ng\u1ECDc Hoa");
 		author.setBackground(SystemColor.control);
-		author.setBounds(41, 461, 273, 22);
+		author.setBounds(41, 461, 300, 22);
 		contentPane.add(author);
 		author.setVisible(false);
 		
