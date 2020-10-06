@@ -2,6 +2,9 @@
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import javax.sound.midi.VoiceStatus;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,17 +48,17 @@ public class DictionaryManagement extends Dictionary {
 
     /** search from File */
     public String dictionaryLookup(String str) {
-        boolean test = false;
+//        boolean test = false;
         for (Word searchWord : dictionaries.words) {
             if (str.equals(searchWord.word_target)) {
-            	test = true;
+//            	test = true;
                 return searchWord.word_explain; 
             } else if (str.equals(searchWord.word_explain)) {
-            	test = true;
+//            	test = true;
                 return searchWord.word_target;   
             }
         }
-        return "0";
+        return "Sorry, You do nothing";
         
     }
     /** add, remove, edit Dictionary*/
@@ -150,7 +153,7 @@ public class DictionaryManagement extends Dictionary {
         }
 
     }
-
+    
     /** insert data by command */
     public void insertFromCommandLine() {
         String tempt_1 = scanner.nextLine();
