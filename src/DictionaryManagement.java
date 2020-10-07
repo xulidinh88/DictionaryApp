@@ -1,5 +1,7 @@
 
 import java.io.*;
+
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -165,4 +167,5 @@ public class DictionaryManagement extends Dictionary {
         wordDraft = new Word(tempt_1,tempt_2);
         dictionaries.words.add(wordDraft);
     }
+    
 }

@@ -1,4 +1,8 @@
 import java.awt.BorderLayout;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import org.json.simple.parser.ParseException;
+import java.awt.*;
 
 import java.awt.EventQueue;
 
@@ -220,9 +224,9 @@ public class DictionaryApplication extends JFrame {
 				author.setVisible(true);
 			}
 		});
-		chckbxNewCheckBox.setBounds(16, 457, 21, 17);
-		contentPane.add(chckbxNewCheckBox);
 		
+		
+		/* API */
 		
 		
 	}
