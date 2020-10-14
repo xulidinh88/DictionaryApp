@@ -67,6 +67,11 @@ public class DictionaryManagement extends Dictionary {
 	}
 
 	/** add, remove, edit Dictionary */
+	public void addWord(String str_1, String str_2) {
+		Word wordDraft = new Word(str_1, str_2);
+		dictionaries.words.add(wordDraft);
+	}
+	
 	public void editDictionary() {
 		int key_test = 0;
 		while (key_test == 0) {

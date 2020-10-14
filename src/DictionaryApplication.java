@@ -23,11 +23,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollBar;
 import javax.swing.event.ListSelectionListener;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 
 import javax.swing.event.ListSelectionEvent;
@@ -41,6 +44,8 @@ import java.util.LinkedList;
 import javax.swing.JCheckBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
 
 /*Dictionary App
  * Author : Xuân Linh
@@ -52,7 +57,9 @@ public class DictionaryApplication extends JFrame {
 	private JTextField jText;
 	DictionaryManagement dicM = new DictionaryManagement();
 	DictionaryCommandLine dicManL = new DictionaryCommandLine();
-
+	private JTextField addTargetTextField;
+	private JTextField addExplainTextField;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -75,12 +82,15 @@ public class DictionaryApplication extends JFrame {
 	public DictionaryApplication() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 791, 592);
+		/* Content Panel */
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(245, 245, 245));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
+		
+		
 		// Title
 		JLabel lblNewLabel = new JLabel("ICTIONARY");
 		lblNewLabel.setBackground(Color.GRAY);
@@ -112,6 +122,7 @@ public class DictionaryApplication extends JFrame {
 				jText.setText(str);
 			}
 		});
+		
 		// Set scroll
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		for (Word w : dicM.dictionaries.words) {
@@ -248,8 +259,81 @@ public class DictionaryApplication extends JFrame {
 		i = introIcon.getImage();
 		introIcon = new ImageIcon(i.getScaledInstance(115, 115, Image.SCALE_SMOOTH));
 		introLabel.setIcon(introIcon);
+		setVisible(false);
 		
+		
+		/* Add Label */
 		JLabel addLabel = new JLabel("");
+		addLabel.setToolTipText("Add word");
+		
+		// Add word
+		JPanel editPanel = new JPanel();
+		editPanel.setBackground(UIManager.getColor("CheckBox.highlight"));
+		editPanel.setBounds(115, 106, 650, 436);
+		contentPane.add(editPanel);
+		editPanel.setLayout(null);
+		
+		addTargetTextField = new JTextField();
+		addTargetTextField.setBounds(309, 110, 216, 30);
+		editPanel.add(addTargetTextField);
+		addTargetTextField.setColumns(10);
+		
+		addExplainTextField = new JTextField();
+		addExplainTextField.setBounds(309, 196, 216, 30);
+		editPanel.add(addExplainTextField);
+		addExplainTextField.setColumns(10);
+		
+		JButton addTargetButton = new JButton("Add Word");
+		addTargetButton.setBackground(SystemColor.text);
+		addTargetButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		addTargetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dicM.addWord(addTargetTextField.getText(), addExplainTextField.getText());
+				model.addElement(addTargetTextField.getText());
+				scrollPane.setVisible(true);
+				JOptionPane.showMessageDialog(editPanel, "Add word  successfully, scroll your list to see word");
+			}
+		});
+		addTargetButton.setBounds(309, 245, 111, 30);
+		editPanel.add(addTargetButton);
+		
+		JButton doneBtn = new JButton("Done");
+		doneBtn.setToolTipText("End edit word");
+		doneBtn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		doneBtn.setBackground(SystemColor.text);
+		doneBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editPanel.setVisible(false);
+				explainArea.setVisible(true);
+				scrollPane.setVisible(true);
+			}
+		});
+		
+		/* to end panel edit */
+		doneBtn.setBounds(524, 376, 89, 30);
+		editPanel.add(doneBtn);
+		
+		JLabel addTargetWordLabel = new JLabel("Input English Word");
+		addTargetWordLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		addTargetWordLabel.setBounds(309, 86, 216, 23);
+		editPanel.add(addTargetWordLabel);
+		
+		JLabel addExplainWordLabel = new JLabel("Input Vietnamese Word");
+		addExplainWordLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		addExplainWordLabel.setBounds(309, 172, 216, 23);
+		editPanel.add(addExplainWordLabel);
+		
+		
+		editPanel.setVisible(false);
+		addLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				editPanel.setVisible(true);
+				scrollPane.setVisible(false);
+				explainArea.setVisible(false);
+			}
+		});
+		
 		addLabel.setBounds(30, 190, 60, 60);
 		contentPane.add(addLabel);
 		ImageIcon addIcon = new ImageIcon("img/add-file.png");
@@ -258,6 +342,7 @@ public class DictionaryApplication extends JFrame {
 		addLabel.setIcon(addIcon);
 		
 		JLabel editLabel = new JLabel("");
+		editLabel.setToolTipText("Edit Word");
 		editLabel.setBounds(30, 290, 60, 60);
 		contentPane.add(editLabel);
 		ImageIcon editIcon = new ImageIcon("img/edit.png");
@@ -266,6 +351,7 @@ public class DictionaryApplication extends JFrame {
 		editLabel.setIcon(editIcon);
 		
 		JLabel deleteLabel = new JLabel("");
+		deleteLabel.setToolTipText("Delete Word");
 		deleteLabel.setBounds(30, 390, 60, 60);
 		contentPane.add(deleteLabel);
 		ImageIcon deleteIcon = new ImageIcon("img/delete.png");
@@ -286,6 +372,9 @@ public class DictionaryApplication extends JFrame {
 		lblNewLabel_1_1.setBackground(Color.WHITE);
 		lblNewLabel_1_1.setBounds(347, 103, 399, 25);
 		contentPane.add(lblNewLabel_1_1);
+		
+		
+		
 		
 		/* API */
 
