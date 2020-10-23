@@ -4,10 +4,9 @@ import java.util.LinkedList;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 /**
- * Author : Xu�n Linh
+ * Author : Xuân Linh && Nguyễn Ngọc Hoa
  */
 public class DictionaryCommandLine extends DictionaryManagement {
-
 	/** show Data */
 	public void showAllWords() {
 		for (Word searchWord : dictionaries.words) {

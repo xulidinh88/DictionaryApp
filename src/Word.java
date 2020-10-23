@@ -1,5 +1,6 @@
 /**
- * TO DO: Author : Xu�n Linh
+ * TO DO:
+ * Author : Xuân Linh && Nguyễn Ngọc Hoa
  */
 public class Word {
 	String word_target;

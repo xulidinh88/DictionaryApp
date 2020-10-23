@@ -14,9 +14,9 @@ import java.io.InputStreamReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
+/*
  * TO DO: insertData 
- * Author : Xuân Linh
+ * Author : Xuân Linh && Nguyễn Ngọc Hoa
  */
 
 public class DictionaryManagement extends Dictionary {
@@ -29,7 +29,7 @@ public class DictionaryManagement extends Dictionary {
 		insertFromFile();
 	}
 
-	/** insert data from file */
+	/* insert data from file */
 	private final File fileDictionaries = new File("DictEV.dic");
 
 	public void insertFromFile() {
@@ -50,7 +50,7 @@ public class DictionaryManagement extends Dictionary {
 		}
 	}
 
-	/** search from File */
+	/* search from File */
 	public String dictionaryLookup(String str) {
 //        boolean test = false;
 		for (Word searchWord : dictionaries.words) {
@@ -66,11 +66,26 @@ public class DictionaryManagement extends Dictionary {
 
 	}
 
-	/** add, remove, edit Dictionary */
+	/* add word Dictionary */
 	public void addWord(String str_1, String str_2) {
-		Word wordDraft = new Word(str_1, str_2);
-		dictionaries.words.add(wordDraft);
+		Word _word = new Word(str_1, str_2);
+		dictionaries.words.add(_word);
 	}
+	
+	/* Delete word Dictionary*/
+	public void deleteWord(String str) {
+		for (Word w: dictionaries.words) {
+			if (w.word_target.equals(str)) {
+				dictionaries.words.remove(w);
+			}
+		}
+	}
+	
+//	/* Replace word */
+//	public void deleteWord(Word _word1, Word _word2) {
+//		dictionaries.words.remove(_word1);
+//		dictionaries.words.add(_word2);
+//	}
 	
 	public void editDictionary() {
 		int key_test = 0;
@@ -145,7 +160,7 @@ public class DictionaryManagement extends Dictionary {
 
 	}
 
-	/** Dictionary export to file */
+	/* Dictionary export to file */
 	public void dictionaryExportToFile() {
 		try {
 			// Whatever the file path is.
@@ -164,7 +179,7 @@ public class DictionaryManagement extends Dictionary {
 
 	}
 
-	/** insert data by command */
+	/* insert data by command */
 	public void insertFromCommandLine() {
 		String tempt_1 = scanner.nextLine();
 		String tempt_2 = scanner.nextLine();

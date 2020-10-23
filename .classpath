@@ -10,5 +10,8 @@
 	<classpathentry kind="lib" path="lib/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/gtranslateapi-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jl1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hihi Haha/Desktop/apiGoogle.jar"/>
+	<classpathentry kind="lib" path="D:/Code/JAVA/Dictionary/bin/apiGoogle.jar"/>
+	<classpathentry kind="lib" path="D:/Code/JAVA/Dictionary/bin/sqljdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
